@@ -27,7 +27,7 @@ const SectionItemDefault = ({text, ...rest}) => (
 const SectionItemVote = ({text, ...rest}) => (
   <div className='section-item section-item--vote display-flex-row'>
     <div className='section-item-vote'>
-      <input type='text' className='vote' defaultValue={0}/>
+      <input type='text' className='input input-vote' defaultValue={0}/>
     </div>
     <div className='section-item-text flex-auto'>
       {text}
