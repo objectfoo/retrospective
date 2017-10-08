@@ -3,12 +3,6 @@ import {v4} from 'uuid'
 export const LAYOUT_ENTRY = 'LAYOUT_ENTRY'
 export const LAYOUT_PRINTABLE = 'LAYOUT_PRINTABLE'
 
-export const LIST_CONFIGS = [
-  {type: 'good', title: 'What went well?'},
-  {type: 'bad', title: 'When needs improvement?', isVoting: true},
-  {type: 'next', title: 'What should we try next time?'}
-];
-
 const good = [
   {id: v4(), text: 'good item one'},
   {id: v4(), text: 'good item two'}

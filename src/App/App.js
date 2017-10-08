@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
-import {DEFAULT_STATE, LIST_CONFIGS} from '../constants'
-import {makeProps} from '../helpers'
+import {DEFAULT_STATE} from '../constants'
 import {Header, Footer} from './components'
 import ListSection from '../ListSection'
 import {v4} from 'uuid'
@@ -8,22 +7,12 @@ import {v4} from 'uuid'
 export class App extends Component {
   constructor(props) {
     super(props)
-    const {fnCreateAsync, fnUpdate, fnDeleteAsync} = this
     this.state = {...DEFAULT_STATE}
-
-    // prop factory helpers for render
-    // this.goodPropFactory, this.nextPropFactory ...
-    LIST_CONFIGS.forEach(c =>
-      this[`${c.type}PropFactory`] = makeProps({
-        fnCreateAsync,
-        fnUpdate,
-        fnDeleteAsync,
-        ...c
-      })
-    )
   }
 
   render() {
+    const {fnCreateAsync, fnUpdateAsync, fnDeleteAsync} = this
+
     return (
       <div className="retro display-flex-column">
         <div className='accent accent-color'>
@@ -31,9 +20,21 @@ export class App extends Component {
         </div>
         <div className='accent'>
           <main className='retro-main'>
-            <ListSection {...this.goodPropFactory(this)} />
-            <ListSection {...this.badPropFactory(this)} />
-            <ListSection {...this.nextPropFactory(this)} />
+            <ListSection {...{
+              list: this.state['good'],
+              ...{type: 'good', title: 'What went well?'},
+              ...{fnCreateAsync, fnUpdateAsync, fnDeleteAsync}
+            }} />
+            <ListSection {...{
+              list: this.state['bad'],
+              ...{type: 'bad', title: 'When needs improvement?', isVoting: true},
+              ...{fnCreateAsync, fnUpdateAsync, fnDeleteAsync}
+            }} />
+            <ListSection {...{
+              list: this.state['next'],
+              ...{type: 'next', title: 'What should we try next time?'},
+              ...{fnCreateAsync, fnUpdateAsync, fnDeleteAsync}
+            }} />
           </main>
         </div>
         <div className='accent accent-color flex-align-bottom'>
@@ -49,12 +50,14 @@ export class App extends Component {
     this.setState(state => {
       state[type].byId[uuid] = {id: uuid, ...rest}
       state[type].allIds.unshift(uuid)
-      return state;
+      return state
     }, callback())
   }
 
-  fnUpdate = ({target}) => {
-    console.log('fnUpdate', target)
+  fnUpdateAsync = ({target}, cb) => {
+    const callback = cb || (() => null)
+    console.log('fnUpdateAsync', target)
+    callback()
   }
 
   fnDeleteAsync = ({target: {dataset: {id, type}}}, cb) => {
