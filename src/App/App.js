@@ -25,7 +25,7 @@ export class App extends Component {
 
   render() {
     return (
-      <div className="retro display-flex-col">
+      <div className="retro display-flex-column">
         <div className='accent accent-color'>
           <Header />
         </div>
