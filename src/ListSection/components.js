@@ -39,8 +39,10 @@ const SectionItemVote = ({text, ...rest}) => (
 )
 
 export const ListOfDefaultItems = newListRenderer(SectionItemDefault)
+ListOfDefaultItems.displayName = 'ListOfDefaultItems'
 
 export const ListOfVoteItems = newListRenderer(SectionItemVote)
+ListOfVoteItems.displayName = 'ListOfVoteItems'
 
 export const InputGroup = ({
   id,
