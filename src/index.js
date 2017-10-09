@@ -6,5 +6,5 @@ import pkg from '../package.json'
 import './normalize.css'
 import './index.css'
 
-ReactDOM.render(<App {...{pkg}} />, document.getElementById('root'))
+ReactDOM.render(<App {...{version: pkg.version}} />, document.getElementById('root'))
 registerServiceWorker()

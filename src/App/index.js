@@ -12,6 +12,7 @@ export class App extends Component {
 
   render() {
     const {fnCreateAsync, fnUpdateAsync, fnDeleteAsync} = this
+    const actions = {fnCreateAsync, fnUpdateAsync, fnDeleteAsync}
 
     return (
       <div className="retro display-flex-column">
@@ -24,25 +25,25 @@ export class App extends Component {
               list: this.state['good'],
               type: 'good',
               title: 'What went well?',
-              ...{fnCreateAsync, fnUpdateAsync, fnDeleteAsync}
+              ...actions
             }} />
             <ListSection {...{
               list: this.state['bad'],
               type: 'bad',
               title: 'When needs improvement?',
               isVoting: true,
-              ...{fnCreateAsync, fnUpdateAsync, fnDeleteAsync}
+              ...actions
             }} />
             <ListSection {...{
+              list: this.state['next'],
               type: 'next',
               title: 'What should we try next time?',
-              list: this.state['next'],
-              ...{fnCreateAsync, fnUpdateAsync, fnDeleteAsync}
+              ...actions
             }} />
           </main>
         </div>
         <div className='accent accent-color flex-align-bottom'>
-          <Footer version={this.props.pkg.version} />
+          <Footer version={this.props.version} />
         </div>
       </div>
     )
