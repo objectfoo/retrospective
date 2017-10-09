@@ -1,5 +1,4 @@
 import React from 'react'
-import {newListRenderer} from '../helpers'
 
 const DeleteButton = ({type, id, fnDeleteAsync}) => {
   return(
@@ -13,7 +12,7 @@ const DeleteButton = ({type, id, fnDeleteAsync}) => {
   )
 }
 
-const SectionItemDefault = ({text, ...rest}) => (
+export const SectionItemDefault = ({text, ...rest}) => (
   <div className='section-item section-item--default display-flex-row'>
     <div className='section-item-text flex-auto'>
       {text}
@@ -24,7 +23,7 @@ const SectionItemDefault = ({text, ...rest}) => (
   </div>
 )
 
-const SectionItemVote = ({text, ...rest}) => (
+export const SectionItemVote = ({text, ...rest}) => (
   <div className='section-item section-item--vote display-flex-row'>
     <div className='section-item-vote'>
       <input type='text' className='input input-vote' defaultValue={0}/>
@@ -37,12 +36,6 @@ const SectionItemVote = ({text, ...rest}) => (
     </div>
   </div>
 )
-
-export const ListOfDefaultItems = newListRenderer(SectionItemDefault)
-ListOfDefaultItems.displayName = 'ListOfDefaultItems'
-
-export const ListOfVoteItems = newListRenderer(SectionItemVote)
-ListOfVoteItems.displayName = 'ListOfVoteItems'
 
 export const InputGroup = ({
   id,
