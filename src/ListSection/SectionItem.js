@@ -10,9 +10,9 @@ export class SectionItem extends React.Component {
     const newState = {
       value: props.text
     }
-    this.isVoting = props.type === 'bad'
 
     if (props.type === 'bad') {
+      this.isVoting = true
       newState.value = 0
     }
 
