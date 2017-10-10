@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DeleteButton = ({type, id, fnDeleteAsync}) => {
+export const DeleteButton = ({type, id, fnDeleteAsync}) => {
   return(
     <div
       className='icn-delete flex-initial'
@@ -11,31 +11,6 @@ const DeleteButton = ({type, id, fnDeleteAsync}) => {
     </div>
   )
 }
-
-export const SectionItemDefault = ({text, ...rest}) => (
-  <div className='section-item section-item--default display-flex-row'>
-    <div className='section-item-text flex-auto'>
-      {text}
-    </div>
-    <div className='section-item-delete'>
-      <DeleteButton {...rest} />
-    </div>
-  </div>
-)
-
-export const SectionItemVote = ({text, ...rest}) => (
-  <div className='section-item section-item--vote display-flex-row'>
-    <div className='section-item-vote'>
-      <input type='text' className='input input-vote' defaultValue={0}/>
-    </div>
-    <div className='section-item-text flex-auto'>
-      {text}
-    </div>
-    <div className='section-item-delete'>
-      <DeleteButton {...rest} />
-    </div>
-  </div>
-)
 
 export const InputGroup = ({
   id,

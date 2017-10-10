@@ -31,7 +31,6 @@ export class App extends Component {
               list: this.state['bad'],
               type: 'bad',
               title: 'When needs improvement?',
-              isVoting: true,
               ...actions
             }} />
             <ListSection {...{
@@ -59,10 +58,16 @@ export class App extends Component {
     }, callback())
   }
 
-  fnUpdateAsync = ({target}, cb) => {
+  fnUpdateAsync = ({type, id, ...rest}, cb) => {
     const callback = cb || (() => null)
-    console.log('fnUpdateAsync', target)
-    callback()
+
+    this.setState(state => {
+      if ('vote' in rest) {
+        state[type].byId[id].value = rest.value
+      } else {
+        state[type].byId[id].text = rest.text
+      }
+    }, callback())
   }
 
   fnDeleteAsync = ({target: {dataset: {id, type}}}, cb) => {

@@ -1,9 +1,8 @@
 import React from 'react'
 import {
   InputGroup,
-  SectionItemDefault,
-  SectionItemVote
 } from './components'
+import SectionItem from './SectionItem'
 
 export class ListSection extends React.Component {
   constructor() {
@@ -14,8 +13,7 @@ export class ListSection extends React.Component {
   }
 
   render() {
-    const {title, isVoting=false, list, ...rest} = this.props
-    const Component = isVoting ? SectionItemVote : SectionItemDefault
+    const {title, type, list, ...rest} = this.props
 
     return(
       <div className='section'>
@@ -26,12 +24,13 @@ export class ListSection extends React.Component {
               <InputGroup {...{
                 onChange: this.handleChange,
                 value: this.state.value,
+                type,
                 ...rest
               }} />
             </form>
           </div>
           {list.allIds.map(uuid => (
-            <Component key={uuid} {...list.byId[uuid]} {...rest} />
+            <SectionItem key={uuid} {...{type, ...rest, ...list.byId[uuid]}} />
           ))}
         </div>
       </div>

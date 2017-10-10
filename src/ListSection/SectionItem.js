@@ -1,0 +1,74 @@
+import React from 'react'
+import {DeleteButton} from './components'
+
+const clampVote = value => Math.min(999, Math.max(0, value))
+const santizeVoteNumber = (v='') => parseInt(v.replace(/[^0-9]/, ''), 10) || 0
+
+export class SectionItem extends React.Component {
+  constructor(props) {
+    super(props)
+    const newState = {
+      value: props.text
+    }
+    this.isVoting = props.type === 'bad'
+
+    if (props.type === 'bad') {
+      newState.value = 0
+    }
+
+    this.state = newState
+  }
+
+  render() {
+    const {
+      type,
+      text,
+      id,
+      fnDeleteAsync
+    } = this.props
+
+    return(
+      <div className='section-item section-item--vote display-flex-row'>
+        {this.isVoting && (
+          <div className='section-item-vote'>
+            <input
+              data-id={id}
+              data-type={type}
+              type='text'
+              className='input input-vote'
+              value={this.state.value}
+              onBlur={this.onVoteBlur}
+              onChange={this.onVoteChange}
+              onKeyDown={this.onVoteKeyDown} />
+          </div>
+        )}
+        <div className='section-item-text flex-auto'>
+          {text}
+        </div>
+        <div className='section-item-delete'>
+          <DeleteButton {...{fnDeleteAsync, type, id}} />
+        </div>
+      </div>
+    )
+  }
+
+  onVoteBlur = ({target: {classList, dataset: {id, type}}}) => {
+    this.props.fnUpdateAsync({type, id, vote: this.state.value})
+  }
+
+  onVoteKeyDown = ({keyCode}) => {
+    if (keyCode === 40 || keyCode === 38) {
+      this.setState(state => ({
+        value: clampVote(state.value + ((keyCode - 39) * -1))
+      }))
+    }
+  }
+
+  onVoteChange = ({target: {value}}) => {
+    this.setState(state => ({
+      value: clampVote(santizeVoteNumber(value))
+    }))
+  }
+}
+
+export default SectionItem

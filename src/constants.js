@@ -9,8 +9,8 @@ const good = [
 ];
 
 const bad = [
-  {id: v4(), text: 'bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one '},
-  {id: v4(), text: 'bad item two'}
+  {id: v4(), vote: 0, text: 'bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one '},
+  {id: v4(), vote: 0, text: 'bad item two'}
 ];
 
 const next = [
@@ -19,7 +19,7 @@ const next = [
 ];
 
 const makeSectionStore = items => items.reduce((acc, i) => {
-  acc[i.id] = {id: i.id, text: i.text};
+  acc[i.id] = {...i};
   return acc;
 }, {});
 
