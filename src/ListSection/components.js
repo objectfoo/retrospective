@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const DeleteButton = ({type, id, fnDeleteAsync}) => {
-  return(
+  return (
     <div
       className='icn-delete flex-initial'
       data-id={id}
@@ -12,13 +12,13 @@ export const DeleteButton = ({type, id, fnDeleteAsync}) => {
   )
 }
 
-export const InputGroup = ({
+export const NewItemEntry = ({
   id,
   placeholder,
   onChange,
   value
 }) => {
-  return(
+  return (
     <label htmlFor={id}>
       <input
         id={id}

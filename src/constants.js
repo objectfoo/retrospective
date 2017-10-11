@@ -6,22 +6,22 @@ export const LAYOUT_PRINTABLE = 'LAYOUT_PRINTABLE'
 const good = [
   {id: v4(), text: 'good item one'},
   {id: v4(), text: 'good item two'}
-];
+]
 
 const bad = [
   {id: v4(), vote: 0, text: 'bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one bad item one '},
   {id: v4(), vote: 0, text: 'bad item two'}
-];
+]
 
 const next = [
   {id: v4(), text: 'next item one'},
   {id: v4(), text: 'next item two'}
-];
+]
 
 const makeSectionStore = items => items.reduce((acc, i) => {
-  acc[i.id] = {...i};
-  return acc;
-}, {});
+  acc[i.id] = {...i}
+  return acc
+}, {})
 
 export const DEFAULT_STATE = {
   layout: LAYOUT_ENTRY,

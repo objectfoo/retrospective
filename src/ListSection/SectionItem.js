@@ -1,8 +1,8 @@
 import React from 'react'
 import {DeleteButton} from './components'
+import {processVote, clampVote} from '../helpers'
 
-const clampVote = value => Math.min(999, Math.max(0, value))
-const santizeVoteNumber = (v='') => parseInt(v.replace(/[^0-9]/, ''), 10) || 0
+
 
 export class SectionItem extends React.Component {
   constructor(props) {
@@ -66,7 +66,7 @@ export class SectionItem extends React.Component {
 
   onVoteChange = ({target: {value}}) => {
     this.setState(state => ({
-      value: clampVote(santizeVoteNumber(value))
+      value: processVote(value)
     }))
   }
 }

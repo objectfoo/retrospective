@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  InputGroup,
+  NewItemEntry,
 } from './components'
 import SectionItem from './SectionItem'
 
@@ -21,7 +21,7 @@ export class ListSection extends React.Component {
         <div className='section-list'>
           <div className='section-input-form-wrapper'>
             <form onSubmit={this.handleSubmit}>
-              <InputGroup {...{
+              <NewItemEntry {...{
                 onChange: this.handleChange,
                 value: this.state.value,
                 type,

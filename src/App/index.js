@@ -15,7 +15,7 @@ export class App extends Component {
     const actions = {fnCreateAsync, fnUpdateAsync, fnDeleteAsync}
 
     return (
-      <div className="retro display-flex-column">
+      <div className='retro display-flex-column'>
         <div className='accent accent-color'>
           <Header />
         </div>
