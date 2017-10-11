@@ -67,6 +67,7 @@ export class App extends Component {
       } else {
         state[type].byId[id].text = rest.text
       }
+      return state;
     }, callback())
   }
 

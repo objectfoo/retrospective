@@ -39,11 +39,15 @@ export class ListSection extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
+    const {fnCreateAsync, type} = this.props
+    const callback = () => this.setState(state => ({value: ''}))
+    const payload = {
+      type: type,
+      text: this.state.value
+    }
+
     if (this.state.value.length > 0) {
-      this.props.fnCreateAsync(
-        { type: this.props.type, text: this.state.value },
-        () => this.setState(state => ({value: ''}))
-      )
+      fnCreateAsync(payload,callback)
     }
   }
 

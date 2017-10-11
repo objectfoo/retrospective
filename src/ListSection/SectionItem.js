@@ -2,13 +2,12 @@ import React from 'react'
 import {DeleteButton} from './components'
 import {processVote, clampVote} from '../helpers'
 
-
-
 export class SectionItem extends React.Component {
   constructor(props) {
     super(props)
     const newState = {
-      value: props.text
+      text: props.text,
+      isEditing: false
     }
 
     if (props.type === 'bad') {
@@ -20,6 +19,7 @@ export class SectionItem extends React.Component {
   }
 
   render() {
+    const {isEditing} = this.state
     const {
       type,
       text,
@@ -42,14 +42,64 @@ export class SectionItem extends React.Component {
               onKeyDown={this.onVoteKeyDown} />
           </div>
         )}
-        <div className='section-item-text flex-auto'>
-          {text}
-        </div>
+        {isEditing ? (
+          <div onDoubleClick={this.onTextDoubleClick} className='section-item-text flex-auto'>
+            <input
+              ref={this.registerRef}
+              autoFocus
+              type='text'
+              value={this.state.text}
+              onBlur={this.onInputBlur}
+              onChange={this.onInputChange}
+              onKeyDown={this.onInputKeyDown}
+              />
+          </div>
+        ) : (
+          <div onDoubleClick={this.onTextDoubleClick} className='section-item-text flex-auto'>
+            {text}
+          </div>
+        )}
         <div className='section-item-delete'>
           <DeleteButton {...{fnDeleteAsync, type, id}} />
         </div>
       </div>
     )
+  }
+
+  registerRef = el => {
+    if (el !== null) {
+      this.InputText = el
+    }
+  }
+
+  onInputKeyDown = ({keyCode}) => {
+    // TODO: handle escape
+    if (keyCode === 13 && this.InputText) {
+      this.InputText.blur()
+    }
+  }
+
+  onInputChange = ({target: {value}}) => {
+    this.setState(state => ({
+      text: value
+    }))
+  }
+
+  onInputBlur = ({target: {value}}) => {
+    const {fnUpdateAsync, type, id} = this.props
+    const payload = {type, id, text: value};
+    const callback = () => {
+      this.setState(state => ({isEditing: !state.isEditing}))
+    }
+
+    fnUpdateAsync(payload, callback)
+  }
+
+  onTextDoubleClick = e => {
+    // TODO: cache value before editing in case user hits escape
+    this.setState(state => ({
+      isEditing: !state.isEditing
+    }))
   }
 
   onVoteBlur = ({target: {classList, dataset: {id, type}}}) => {
