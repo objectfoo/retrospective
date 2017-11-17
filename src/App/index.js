@@ -5,12 +5,16 @@ import ListSection from '../ListSection'
 import {v4} from 'uuid'
 
 export class App extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {...DEFAULT_STATE}
+
+    this.fnCreateAsync = this.fnCreateAsync.bind(this)
+    this.fnUpdateAsync = this.fnUpdateAsync.bind(this)
+    this.fnDeleteAsync = this.fnDeleteAsync.bind(this)
   }
 
-  render() {
+  render () {
     const {fnCreateAsync, fnUpdateAsync, fnDeleteAsync} = this
     const actions = {fnCreateAsync, fnUpdateAsync, fnDeleteAsync}
 
@@ -48,7 +52,7 @@ export class App extends Component {
     )
   }
 
-  fnCreateAsync = ({type, ...rest}, cb) => {
+  fnCreateAsync ({type, ...rest}, cb) {
     const callback = cb || (() => null)
     const uuid = v4()
     this.setState(state => {
@@ -58,7 +62,7 @@ export class App extends Component {
     }, callback())
   }
 
-  fnUpdateAsync = ({type, id, ...rest}, cb) => {
+  fnUpdateAsync ({type, id, ...rest}, cb) {
     const callback = cb || (() => null)
 
     this.setState(state => {
@@ -67,11 +71,11 @@ export class App extends Component {
       } else {
         state[type].byId[id].text = rest.text
       }
-      return state;
+      return state
     }, callback())
   }
 
-  fnDeleteAsync = ({target: {dataset: {id, type}}}, cb) => {
+  fnDeleteAsync ({target: {dataset: {id, type}}}, cb) {
     const callback = cb || (() => null)
 
     this.setState(state => {

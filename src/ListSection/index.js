@@ -1,21 +1,22 @@
 import React from 'react'
-import {
-  NewItemEntry,
-} from './components'
+import {NewItemEntry} from './components'
 import SectionItem from './SectionItem'
 
 export class ListSection extends React.Component {
-  constructor() {
+  constructor () {
     super()
     this.state = {
-      value: ''
+      text: ''
     }
+    this.resetInputText = this.resetInputText.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
-  render() {
+  render () {
     const {title, type, list, ...rest} = this.props
 
-    return(
+    return (
       <div className='section'>
         <h2 key={`${title}-title`}>{title}</h2>
         <div className='section-list'>
@@ -23,7 +24,7 @@ export class ListSection extends React.Component {
             <form onSubmit={this.handleSubmit}>
               <NewItemEntry {...{
                 onChange: this.handleChange,
-                value: this.state.value,
+                value: this.state.text,
                 type,
                 ...rest
               }} />
@@ -37,23 +38,22 @@ export class ListSection extends React.Component {
     )
   }
 
-  handleSubmit = e => {
+  resetInputText () {
+    this.setState(state => ({text: ''}))
+  }
+
+  handleSubmit (e) {
     e.preventDefault()
     const {fnCreateAsync, type} = this.props
-    const callback = () => this.setState(state => ({value: ''}))
-    const payload = {
-      type: type,
-      text: this.state.value
-    }
+    const payload = {type, text: this.state.text}
 
-    if (this.state.value.length > 0) {
-      fnCreateAsync(payload,callback)
+    if (this.state.text.length > 0) {
+      fnCreateAsync(payload, this.resetInputText)
     }
   }
 
-  handleChange = e => {
-    const value = e.target.value
-    this.setState(state => ({value}))
+  handleChange ({target: {value}}) {
+    this.setState(state => ({text: value}))
   }
 }
 
