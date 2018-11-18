@@ -3,24 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-scripts": "1.0.14",
-    "source-map-explorer": "^1.5.0",
-    "standard": "^10.0.3",
-    "uuid": "^3.1.0"
+    "normalize.css": "^8.0.1",
+    "ramda": "^0.25.0",
+    "react": "^16.7.0-alpha.2",
+    "react-dom": "^16.7.0-alpha.2",
+    "react-scripts": "2.1.1",
+    "uuid": "^3.3.2"
   },
   "scripts": {
-    "analyze": "source-map-explorer build/static/js/main.*",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test",
+    "format": "prettier --write --config ./.prettierrc.yml \"./src/**/*.js\"",
     "eject": "react-scripts eject"
   },
-  "devDependencies": {},
-  "standard": {
-    "env": {
-      "jest": true
-    }
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "prettier": "^1.15.2"
   }
 }

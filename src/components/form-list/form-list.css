@@ -1,0 +1,85 @@
+.form-list {
+	margin: 0 1rem 2rem 1rem;
+	font-size: 1.8rem;
+	line-height: 1.2;
+}
+
+.form-list h2 {
+	margin: 16px 0;
+	padding: 0;
+	font-size: 2rem;
+	font-weight: 400;
+}
+
+.form-container form {
+	display: block;
+	width: 100%;
+}
+
+.form-entry {
+	display: block;
+	box-sizing: border-box;
+	padding: 8px;
+	margin: 0;
+	width: 100%;
+}
+
+.items {
+	list-style-type: none;
+	padding-left: 0;
+	border: 1px solid var(--palette-border-color);
+	border-bottom-width: 0;
+}
+
+.item {
+	position: relative;
+	display: flex;
+	min-height: 32px;
+	padding: 8px;
+	border-bottom: 1px solid var(--palette-border-color);
+}
+
+.item-action {
+	flex: 0 0 44px;
+}
+
+.item-body {
+	flex: 1 1 100%;
+}
+
+button.cancel {
+	margin: 0;
+	padding: 0;
+	font-size: 10px;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	justify-content: center;
+	border-radius: 6px;
+	top: 0px;
+	right: 0px;
+}
+
+button.cancel span {
+	flex: auto;
+	display: block;
+	font-size: 1.5rem;
+}
+
+button.edit {
+	position: absolute;
+	background: #fff;
+	border: none;
+	top: 0px;
+	left: -1000px;
+}
+
+button.edit:focus {
+	position: static;
+	left: initial;
+	visibility: visible;
+	min-width: 32px;
+	height: 32px;
+	left: 8px;
+	top: 0px;
+}
