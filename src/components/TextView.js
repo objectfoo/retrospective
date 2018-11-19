@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TextView = props => {
-	const { children, deleteById, id, ...rest } = props;
+	const { children, id, ...rest } = props;
 
 	return (
 		<div {...rest}>

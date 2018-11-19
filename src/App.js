@@ -1,12 +1,20 @@
 import React from 'react';
-import useList from './lib/useList';
-import useEditing from './lib/useEditing';
+import propEq from 'ramda/src/propEq';
+import filter from 'ramda/src/filter';
+import useAppReducer from './lib/useAppReducer';
 import FormList from './components/form-list/FormList';
 import './App.css';
 
+const filterGood = filter(propEq('type', 'good'));
+const filterBad = filter(propEq('type', 'bad'));
+// const isTypeBad = propEq('type', 'bad');
+// const isTypeNext = propEq('type', 'next');
+
 const App = props => {
-	const list = useList([]);
-	const editing = useEditing(null);
+	const { state, dispatch } = useAppReducer();
+	const { list, editing } = state;
+	const good = filterGood(list);
+	const bad = filterBad(list);
 
 	return (
 		<div className='App'>
@@ -15,23 +23,27 @@ const App = props => {
 			</header>
 			<main id='app'>
 				<FormList
-					id='good'
+					type='good'
 					title='What went well?'
-					list={list}
+					list={good}
 					editing={editing}
+					dispatch={dispatch}
 				/>
 				<FormList
-					id='bad'
+					type='bad'
 					title='What needs improvement?'
-					list={list}
+					list={bad}
 					editing={editing}
+					dispatch={dispatch}
 				/>
+				{/*
 				<FormList
 					id='next'
 					title='What to try next time'
 					list={list}
 					editing={editing}
 				/>
+				*/}
 			</main>
 			<footer>
 				<p>footer</p>
