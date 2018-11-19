@@ -1,9 +1,8 @@
 import React from 'react';
-import { actions } from '../lib/useAppReducer';
 import useInput from '../lib/useInput';
 
 const EditView = props => {
-	const { dispatch, ...rest } = props;
+	const { onSubmit, onKeyDown, ...rest } = props;
 	const { reset, ...editInput } = useInput(rest.text);
 
 	return (
@@ -13,7 +12,10 @@ const EditView = props => {
 				e.preventDefault();
 				const newText = editInput.value;
 				reset();
-				dispatch(actions.updateItem(rest.id, newText));
+				if (onSubmit) {
+					onSubmit(newText, e);
+				}
+				// dispatch(actions.updateItem(rest.id, newText));
 			}}
 		>
 			<input
@@ -27,7 +29,10 @@ const EditView = props => {
 						e.preventDefault();
 					} else if (e.key === 'Escape') {
 						reset();
-						dispatch(actions.setEditing(null));
+						if (onKeyDown) {
+							onKeyDown(e);
+						}
+						// dispatch(actions.setEditing(null));
 					}
 				}}
 			/>

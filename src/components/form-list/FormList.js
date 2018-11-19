@@ -1,6 +1,6 @@
 import React from 'react';
 import EditView from '../EditView';
-import useInput from '../../lib/useInput';
+import FormInput from '../FormInput';
 import { actions } from '../../lib/useAppReducer';
 import './form-list.css';
 
@@ -18,6 +18,10 @@ const textView = (dispatch, id, text) => (
 const editView = (dispatch, el) => {
 	return <EditView {...el} dispatch={dispatch} />;
 };
+
+// const editView = (dispatch, el) => {
+// 	return <FormInput dispatch={dispatch} {...el} />;
+// };
 
 const deleteButton = (dispatch, id) => {
 	return (
@@ -49,34 +53,18 @@ const editButton = (dispatch, id, isEditing) => {
 
 const FormList = props => {
 	const { type, title = 'section', list, editing, dispatch } = props;
-	const { reset, ...userInput } = useInput('');
 
 	return (
 		<div className='form-list'>
 			<h2>{title}</h2>
 			<div className='form-container'>
-				<form
-					onSubmit={e => {
-						e.preventDefault();
-						dispatch(actions.addItem(type, userInput.value));
-						reset();
-					}}
-				>
-					<input
-						type='text'
-						className='form-entry'
-						name={`${type}-entry`}
-						id={`${type}-entry`}
-						{...userInput}
-					/>
-				</form>
+				<FormInput dispatch={dispatch} type={type} />
 			</div>
 			<div className='list-container'>
 				{list.length === 0 ? null : (
 					<ul className='items'>
 						{list.map(el => {
 							const isEditing = el.id === editing;
-
 							return (
 								<li key={el.id} className='item'>
 									{editButton(dispatch, el.id, isEditing)}
