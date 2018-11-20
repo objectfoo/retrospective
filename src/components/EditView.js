@@ -1,40 +1,41 @@
 import React from 'react';
 import useInput from '../lib/useInput';
+import { actions } from '../lib/useAppReducer';
 
 const EditView = props => {
-	const { onSubmit, onKeyDown, ...rest } = props;
-	const { reset, ...editInput } = useInput(rest.text);
+	const { dispatch, id, text } = props;
+	const { reset, value, setValue } = useInput(text);
+	const onSubmit = e => {
+		e.preventDefault();
+		reset();
+		dispatch(actions.updateItem(id, value));
+	};
+
+	const onChange = e => {
+		e.preventDefault();
+		setValue(e.target.value);
+	};
+
+	const onKeyDown = e => {
+		if (e.key === 'Enter' && value.length === 0) {
+			e.preventDefault();
+		} else if (e.key === 'Escape') {
+			reset();
+			dispatch(actions.setEditing(null));
+		}
+	};
 
 	return (
-		<form
-			id={`edit-form-${rest.id}`}
-			onSubmit={e => {
-				e.preventDefault();
-				const newText = editInput.value;
-				reset();
-				if (onSubmit) {
-					onSubmit(newText, e);
-				}
-				// dispatch(actions.updateItem(rest.id, newText));
-			}}
-		>
+		<form id={`edit-form-${id}`} onSubmit={onSubmit}>
 			<input
+				id={`edit-input-${id}`}
 				type='text'
 				autoFocus
 				className='form-entry'
-				name={rest.name}
-				{...editInput}
-				onKeyDown={e => {
-					if (e.key === 'Enter' && rest.text.length === 0) {
-						e.preventDefault();
-					} else if (e.key === 'Escape') {
-						reset();
-						if (onKeyDown) {
-							onKeyDown(e);
-						}
-						// dispatch(actions.setEditing(null));
-					}
-				}}
+				name={`edit-input-${id}`}
+				value={value}
+				onKeyDown={onKeyDown}
+				onChange={onChange}
 			/>
 		</form>
 	);

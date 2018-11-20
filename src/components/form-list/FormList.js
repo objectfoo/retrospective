@@ -4,24 +4,17 @@ import FormInput from '../FormInput';
 import { actions } from '../../lib/useAppReducer';
 import './form-list.css';
 
-const textView = (dispatch, id, text) => (
-	<div
-		id={id}
-		onDoubleClick={() => {
-			dispatch(actions.setEditing(id));
-		}}
-	>
-		<div className='form-entry'>{text}</div>
-	</div>
-);
+const textView = (dispatch, id, text) => {
+	const onDoubleClick = () => dispatch(actions.setEditing(id));
 
-const editView = (dispatch, el) => {
-	return <EditView {...el} dispatch={dispatch} />;
+	return (
+		<div {...{ id, onDoubleClick }}>
+			<div className='form-entry'>{text}</div>
+		</div>
+	);
 };
 
-// const editView = (dispatch, el) => {
-// 	return <FormInput dispatch={dispatch} {...el} />;
-// };
+const editView = (dispatch, el) => <EditView {...el} dispatch={dispatch} />;
 
 const deleteButton = (dispatch, id) => {
 	return (
