@@ -1,50 +1,51 @@
 import React from 'react';
 import propEq from 'ramda/src/propEq';
 import filter from 'ramda/src/filter';
-import useAppReducer from './lib/useAppReducer';
-import FormList from './components/form-list/FormList';
-import './App.css';
+import useAppReducer from '../lib/useAppReducer';
+import FormSection from './FormSection';
 
-const filterGood = filter(propEq('type', 'good'));
-const filterBad = filter(propEq('type', 'bad'));
-// const isTypeBad = propEq('type', 'bad');
-// const isTypeNext = propEq('type', 'next');
+const typeEq = propEq('type');
 
-const App = props => {
+const partitionSubLists = list => [
+	filter(typeEq('good'), list),
+	filter(typeEq('bad'), list),
+	filter(typeEq('next'), list)
+];
+
+const App = () => {
 	const { state, dispatch } = useAppReducer();
 	const { list, editing } = state;
-	const good = filterGood(list);
-	const bad = filterBad(list);
+	const [good, bad, next] = partitionSubLists(list);
 
 	return (
 		<div className='App'>
 			<header className='App-header'>
-				<h1>Retrospective</h1>
+				<h1 className='title-app'>Retrospective</h1>
 			</header>
-			<main id='app'>
-				<FormList
+			<div id='app'>
+				<FormSection
 					type='good'
 					title='What went well?'
 					list={good}
 					editing={editing}
 					dispatch={dispatch}
 				/>
-				<FormList
+				<FormSection
 					type='bad'
+					variant='vote'
 					title='What needs improvement?'
 					list={bad}
 					editing={editing}
 					dispatch={dispatch}
 				/>
-				{/*
-				<FormList
-					id='next'
+				<FormSection
+					type='next'
 					title='What to try next time'
-					list={list}
+					list={next}
 					editing={editing}
+					dispatch={dispatch}
 				/>
-				*/}
-			</main>
+			</div>
 			<footer>
 				<p>footer</p>
 			</footer>

@@ -2,9 +2,10 @@ import React from 'react';
 import useInput from '../lib/useInput';
 import { actions } from '../lib/useAppReducer';
 
-const FormInput = props => {
+const MainInput = props => {
 	const { dispatch, type } = props;
 	const { value, reset, setValue } = useInput(props.text || '');
+	const id = `main-input-${type}`;
 
 	const onSubmit = e => {
 		e.preventDefault();
@@ -21,12 +22,12 @@ const FormInput = props => {
 	};
 
 	return (
-		<form onSubmit={onSubmit}>
+		<form onSubmit={onSubmit} className='form-container'>
 			<input
-				id={`${type}-entry`}
+				id={id}
 				type='text'
-				className='form-entry'
-				name={`${type}-entry`}
+				className='item-content'
+				name={id}
 				value={value}
 				onKeyDown={onKeyDown}
 				onChange={e => setValue(e.target.value)}
@@ -35,4 +36,4 @@ const FormInput = props => {
 	);
 };
 
-export default FormInput;
+export default MainInput;

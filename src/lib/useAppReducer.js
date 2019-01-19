@@ -17,15 +17,21 @@ const TYPES = {
 /**
  * Action Creators
  */
-const addItem = (type, text) => {
-	return {
+const addItem = (type, text, vote) => {
+	const newItem = {
 		type: TYPES.ADD_ITEM,
 		data: {
 			id: uuidv4(),
 			type,
-			text
+			text: text.trim()
 		}
 	};
+
+	if (vote !== undefined) {
+		newItem.data.vote = vote;
+	}
+
+	return newItem;
 };
 
 const delItem = id => {
@@ -46,14 +52,20 @@ const setEditing = id => {
 	};
 };
 
-const updateItem = (id, text) => {
-	return {
+const updateItem = (id, text, vote) => {
+	const newItem = {
 		type: TYPES.UPDATE_ITEM,
 		data: {
 			id,
-			text
+			text: text.trim()
 		}
 	};
+
+	if (vote !== undefined) {
+		newItem.data.vote = Math.max(0, vote);
+	}
+
+	return newItem;
 };
 
 const actions = {
@@ -68,6 +80,7 @@ const actions = {
  */
 function appReducer(state, action = {}) {
 	let newState;
+	let updateStorage = true;
 
 	switch (action.type) {
 		case TYPES.ADD_ITEM:
@@ -106,8 +119,14 @@ function appReducer(state, action = {}) {
 			};
 			break;
 		default:
+			// don't update storage if state doesn't change
+			updateStorage = false;
 			newState = state;
 			break;
+	}
+
+	if (updateStorage) {
+		console.log('persist new state', newState);
 	}
 
 	return newState;
