@@ -5,9 +5,9 @@
   "dependencies": {
     "debounce": "^1.2.0",
     "normalize.css": "^8.0.1",
-    "ramda": "^0.25.0",
-    "react": "^16.8.0-alpha.1",
-    "react-dom": "^16.8.0-alpha.1",
+    "ramda": "^0.26.1",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
     "uuid": "^3.3.2"
   },
   "scripts": {
