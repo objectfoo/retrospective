@@ -64,6 +64,8 @@ export const renderDisplay = (dispatch, el) => {
 	);
 };
 
+const clampVoteValue = value => Math.max(0, Math.min(MAX_VOTES, value));
+
 export const VoteControl = props => {
 	const { dispatch, id, text, vote } = props;
 	const { value, setValue } = useInput(vote || 0);
@@ -77,7 +79,7 @@ export const VoteControl = props => {
 			value={value}
 			onChange={e => {
 				const { target } = e;
-				setValue(Math.min(MAX_VOTES, target.value));
+				setValue(clampVoteValue(target.value));
 				dispatch(actions.updateItem(id, text, target.value));
 			}}
 		/>

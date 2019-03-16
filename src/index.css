@@ -1,9 +1,12 @@
 @import '../node_modules/normalize.css/normalize.css';
 
 :root {
+	--palette-eggshell: #f5f5f5;
+	--palette-navy-blue: #0f1626;
+	--palette-leather: #ab987a;
+	--palette-coral: #ff533d;
 	--palette-primary: blue;
 	--palette-color: rgba(0, 0, 0, 0.87);
-	--palette-title-color: rgba(0, 0, 0, 0.75);
 	--palette-border-color: rgba(0, 0, 0, 0.28);
 	--spacing-unit: 10;
 	--px-half-u: calc(var(--spacing-unit) * 0.5px);
@@ -20,7 +23,8 @@ body {
 	line-height: 1.4;
 	font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 	font-weight: 400;
-	color: var(--palette-color);
+	color: var(--palette-navy-blue);
+	background-color: var(--palette-eggshell);
 }
 
 input {
@@ -60,7 +64,6 @@ h6 {
 	font-weight: 400;
 	margin: 0;
 	line-height: 1.6;
-	color: var(--palette-title-color);
 }
 
 header {

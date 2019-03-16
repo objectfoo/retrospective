@@ -126,7 +126,7 @@ function appReducer(state, action = {}) {
 	}
 
 	if (updateStorage) {
-		console.log('persist new state', newState);
+		// console.log('persist new state', newState);
 	}
 
 	return newState;
