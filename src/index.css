@@ -1,13 +1,15 @@
 @import '../node_modules/normalize.css/normalize.css';
 
 :root {
-	--palette-eggshell: #f5f5f5;
+	--palette-background: #FFF8DC;
+	--palette-accent: #DCE3FF;
 	--palette-navy-blue: #0f1626;
 	--palette-leather: #ab987a;
 	--palette-coral: #ff533d;
 	--palette-primary: blue;
 	--palette-color: rgba(0, 0, 0, 0.87);
 	--palette-border-color: rgba(0, 0, 0, 0.28);
+	--palette-border-color-light: rgba(0, 0, 0, 0.1);
 	--spacing-unit: 10;
 	--px-half-u: calc(var(--spacing-unit) * 0.5px);
 	--px-one-u: calc(var(--spacing-unit) * 1px);
@@ -15,6 +17,7 @@
 }
 
 html {
+	height: 100%;
 	font-size: var(--px-one-u);
 }
 
@@ -24,7 +27,17 @@ body {
 	font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 	font-weight: 400;
 	color: var(--palette-navy-blue);
-	background-color: var(--palette-eggshell);
+	height: 100%;
+	background: var(--palette-background);
+	background: linear-gradient(to right, var(--palette-accent) 2%, var(--palette-background) 2%);
+}
+
+#root {
+	height: 100%;
+	background-color: var(--palette-background);
+	max-width: 95rem;
+	height: 100%;
+	margin: 0 auto;
 }
 
 input {
@@ -67,6 +80,7 @@ h6 {
 }
 
 header {
+	display: flex;
 	border-bottom: 1px solid var(--palette-border-color);
 	margin-bottom: var(--px-one-u);
 	padding: 0 var(--px-one-u);
@@ -78,7 +92,8 @@ footer {
 	border-top: var(--palette-border);
 }
 
-.title-app {
+.header-title {
+	flex: auto;
 	font-size: 3rem;
 }
 
@@ -134,6 +149,18 @@ button {
 	line-height: 1;
 	font-size: 1.5rem;
 	cursor: pointer;
+}
+
+button.reset {
+	border-radius: 2px;
+	flex: none;
+	border: 1px solid var(--palette-border-color-light);
+	padding: initial 1.2rem;
+	margin: 0.4rem 0;
+}
+button.reset:hover {
+	border: 1px solid var(--palette-border-color);
+	box-shadow: rgba(0,0,0,0.08) 1px 1px 1px;
 }
 
 button.delete {

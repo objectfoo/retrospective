@@ -1,5 +1,4 @@
 import { useReducer } from 'react';
-// import debounce from 'debounce';
 import uuidv4 from 'uuid/v4';
 
 const defaultState = {
@@ -8,6 +7,8 @@ const defaultState = {
 };
 
 const TYPES = {
+	RESET: 'RESET',
+	SET_ALL_LISTS: 'SET_ALL_LISTS',
 	ADD_ITEM: 'ADD_ITEM',
 	DEL_ITEM: 'DEL_ITEM',
 	UPDATE_ITEM: 'UPDATE_ITEM',
@@ -17,6 +18,19 @@ const TYPES = {
 /**
  * Action Creators
  */
+const reset = () => {
+	return { type: TYPES.RESET };
+};
+
+const setAllLists = (list) => {
+	return {
+		type: TYPES.SET_ALL_LISTS,
+		data: {
+			list: list
+		}
+	};
+};
+
 const addItem = (type, text, vote) => {
 	const newItem = {
 		type: TYPES.ADD_ITEM,
@@ -69,6 +83,8 @@ const updateItem = (id, text, vote) => {
 };
 
 const actions = {
+	reset,
+	setAllLists,
 	addItem,
 	delItem,
 	setEditing,
@@ -80,9 +96,19 @@ const actions = {
  */
 function appReducer(state, action = {}) {
 	let newState;
-	let updateStorage = true;
 
 	switch (action.type) {
+		case TYPES.RESET:
+			newState = {
+				...defaultState
+			};
+			break;
+		case TYPES.SET_ALL_LISTS:
+			newState = {
+				editing: null,
+				list: action.data.list
+			};
+			break;
 		case TYPES.ADD_ITEM:
 			newState = {
 				...state,
@@ -119,14 +145,8 @@ function appReducer(state, action = {}) {
 			};
 			break;
 		default:
-			// don't update storage if state doesn't change
-			updateStorage = false;
 			newState = state;
 			break;
-	}
-
-	if (updateStorage) {
-		// console.log('persist new state', newState);
 	}
 
 	return newState;
