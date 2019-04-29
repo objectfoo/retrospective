@@ -1,35 +1,37 @@
 {
-  "name": "retrospective",
+  "name": "new-retro",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "normalize.css": "^8.0.1",
-    "ramda": "^0.26.1",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.0",
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "format": "prettier --write --config ./.prettierrc.yml \"./src/**/*.js\"",
-    "lint": "eslint src/**/*.js",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier src",
+    "docker:build": "docker build -t retro-app .",
+    "docker": "docker run -it --rm -p 3000:3000 -p 35729:35729 -v \"$PWD\":/usr/src retro-app /bin/bash"
+
   },
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
+  "browserslist": {
+    "production": [
+      "ie 11"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "devDependencies": {
-    "prettier": "^1.15.2",
-    "react-scripts": "^2.1.8",
-    "source-map-explorer": "^1.8.0"
+    "prettier": "^1.17.0"
   }
 }
