@@ -14,7 +14,7 @@ const buildOnSubmit = ({ setNewConcern, addConcern, text, type }) => e => {
  * @param {string} props.initialValue
  * @param {(id: string, data: object) => void} props.addConcern
  */
-const ConcernField = props => {
+const Field = props => {
 	const { type, addConcern, initialValue = '' } = props;
 	const [newConcern, setNewConcern] = useState(initialValue);
 	const onSubmit = buildOnSubmit({
@@ -39,4 +39,4 @@ const ConcernField = props => {
 	);
 };
 
-export default ConcernField;
+export default Field;

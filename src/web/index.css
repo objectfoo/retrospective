@@ -1,10 +1,44 @@
+:root {
+	/* backgrounds */
+	/* --main-bg-color: rgb(250, 252, 255); */
+	--main-bg-color: white;
+	--header-background: #83d0f2;
+
+	/* text */
+	--light-text-color: #fff;
+	--dark-text-color: #333;
+
+	/* accents */
+	--line-color: rgba(0, 0, 0, 0.2);
+
+	/* size */
+	--headline-font-size: 1rem;
+
+	/* spacing */
+	--gutter: 1rem;
+	--half-gutter: calc(0.5 * var(--gutter));
+}
+
+html {
+	font-size: 16px;
+}
+
+#root,
+body,
+html {
+	height: 100vh;
+}
+
 body {
 	margin: 0;
 	padding: 0;
+	font-size: 0.875rem;
+	font-weight: 400;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
 		'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	color: var(--dark-text-color);
 }
 
 code {
@@ -35,4 +69,20 @@ code {
 	overflow: visible !important;
 	width: auto !important;
 	white-space: normal !important;
+}
+
+.flex {
+	display: flex;
+}
+
+.flex-col {
+	flex-direction: column;
+}
+
+.flex-row {
+	flex-direction: row;
+}
+
+.flex-grow {
+	flex-grow: 1;
 }

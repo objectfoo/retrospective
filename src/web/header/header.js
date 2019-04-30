@@ -1,18 +1,12 @@
 import React from 'react';
-
-const style = {
-	wrapper: {
-		borderBottom: '1px solid rgba(0,0,0,0.6)',
-		paddingBottom: '1rem',
-		marginBottom: '1rem'
-	}
-};
+import './header.css';
 
 const Header = props => {
 	return (
-		<div style={style.wrapper}>
-			<h1>Retrospective</h1>
-			<div>
+		<header className='flex header-wrapper'>
+			<h1 className='header-headline'>Retrospective</h1>
+			<div className='flex-grow' />
+			<div className='flex flex-col header-btn-wrapper'>
 				<button
 					type='button'
 					disabled={!props.hasConcerns}
@@ -23,7 +17,7 @@ const Header = props => {
 					Reset
 				</button>
 			</div>
-		</div>
+		</header>
 	);
 };
 

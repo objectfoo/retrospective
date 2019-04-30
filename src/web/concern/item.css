@@ -1,0 +1,21 @@
+.item-wrapper {
+	display: flex;
+}
+
+.item-wrapper > * {
+	margin: 0;
+	padding: 0;
+	background: none;
+	border: 0;
+}
+
+.item-wrapper :first-child {
+	flex: auto;
+}
+
+.item-wrapper :nth-child(3),
+.item-wrapper :nth-child(2) {
+	flex: none;
+	box-sizing: border-box;
+	margin-left: var(--gutter);
+}

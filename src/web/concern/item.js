@@ -1,4 +1,5 @@
 import React from 'react';
+import './item.css';
 
 const TextWrapper = props => <div>{props.children}</div>;
 
@@ -13,19 +14,17 @@ const TextWrapper = props => <div>{props.children}</div>;
  * @param {(record: object) => void} props.setEditing
  * @return {React.ReactNode}
  */
-const ConcernItem = props => {
+const Item = props => {
 	const { id, editing, text, removeConcern, setEditing } = props;
 	const isEditing = editing === id;
 
 	return (
-		<div>
-			<div>
-				{isEditing ? 'editing' : <TextWrapper>{text}</TextWrapper>}
-				<button onClick={() => setEditing(isEditing ? null : id)}>edit</button>
-				<button onClick={() => removeConcern({ id })}>&times;</button>
-			</div>
+		<div className='item-wrapper'>
+			{isEditing ? <div>editing input</div> : <TextWrapper>{text}</TextWrapper>}
+			<button onClick={() => setEditing(isEditing ? null : id)}>edit</button>
+			<button onClick={() => removeConcern({ id })}>&times;</button>
 		</div>
 	);
 };
 
-export default ConcernItem;
+export default Item;
