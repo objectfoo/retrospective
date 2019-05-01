@@ -1,20 +1,27 @@
 import React from 'react';
-import ConcernItem from './item';
-import ConcernField from './field';
+import Item from './item';
+import Field from './field';
 import './section.css';
 
 const Section = props => {
 	const { editing, filteredConcerns: concerns, title, type, actions } = props;
+	const fProps = {
+		type,
+		addConcern: actions.addConcern,
+		inputProps: { id: type }
+	};
 
 	return (
 		<div className='section-wrapper'>
-			<h2 className='section-headline'>{title}</h2>
-			<ConcernField {...{ type, addConcern: actions.addConcern }} />
+			<label htmlFor={type}>
+				<h2 className='section-headline'>{title}</h2>
+			</label>
+			<Field {...fProps} />
 			{concerns.length > 0 && (
 				<ul className='section-list'>
 					{concerns.map(c => (
 						<li key={c.id}>
-							<ConcernItem {...{ editing, ...c, ...actions }} />
+							<Item {...{ editing, ...c, ...actions }} />
 						</li>
 					))}
 				</ul>

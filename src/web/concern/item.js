@@ -1,4 +1,5 @@
 import React from 'react';
+import Field from './field';
 import './item.css';
 
 const TextWrapper = props => <div>{props.children}</div>;
@@ -15,14 +16,41 @@ const TextWrapper = props => <div>{props.children}</div>;
  * @return {React.ReactNode}
  */
 const Item = props => {
-	const { id, editing, text, removeConcern, setEditing } = props;
+	const { addConcern, editing, id, removeConcern, setEditing, text, type } = props;
 	const isEditing = editing === id;
 
 	return (
 		<div className='item-wrapper'>
-			{isEditing ? <div>editing input</div> : <TextWrapper>{text}</TextWrapper>}
-			<button onClick={() => setEditing(isEditing ? null : id)}>edit</button>
-			<button onClick={() => removeConcern({ id })}>&times;</button>
+			<div className='item-body'>
+				<Field
+					hidden={!isEditing}
+					inputProps={{ 'aria-label': `edit entry in ${type} list`, id: id }}
+					addConcern={addConcern}
+					type={type}
+					initialValue={text}
+				/>
+				{!isEditing && <TextWrapper>{text}</TextWrapper>}
+			</div>
+			<div className='item-footer'>
+				<button
+					aria-haspopup='true'
+					aria-controls={id}
+					aria-expanded={isEditing}
+					className='btn item-edit'
+					onClick={() => {
+						setEditing(isEditing ? null : id);
+					}}
+				>
+					edit
+				</button>
+				<button
+					aria-label={`delete "${text}"`}
+					className='btn item-delete'
+					onClick={() => removeConcern({ id })}
+				>
+					&times;
+				</button>
+			</div>
 		</div>
 	);
 };

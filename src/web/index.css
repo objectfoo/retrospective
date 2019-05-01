@@ -6,6 +6,7 @@
 
 	/* text */
 	--light-text-color: #fff;
+	--mid-text-color: #666;
 	--dark-text-color: #333;
 
 	/* accents */
@@ -85,4 +86,25 @@ code {
 
 .flex-grow {
 	flex-grow: 1;
+}
+
+.btn {
+	box-sizing: border-box;
+	border: none;
+	color: var(--mid-text-color);
+	cursor: pointer;
+	height: 2rem;
+	line-height: 2rem;
+	margin: 0;
+	padding: 0;
+	width: 2rem;
+}
+
+*[hidden] {
+	position: absolute;
+	left: -10000px;
+	top: auto;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
 }
