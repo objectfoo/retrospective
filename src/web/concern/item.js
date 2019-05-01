@@ -32,24 +32,28 @@ const Item = props => {
 				{!isEditing && <TextWrapper>{text}</TextWrapper>}
 			</div>
 			<div className='item-footer'>
+				<div className='item-footer-item'>
 				<button
 					aria-haspopup='true'
 					aria-controls={id}
 					aria-expanded={isEditing}
-					className='btn item-edit'
+					className='btn item-btn--edit'
 					onClick={() => {
 						setEditing(isEditing ? null : id);
 					}}
 				>
 					edit
 				</button>
+				</div>
+				<div className='item-footer-item'>
 				<button
 					aria-label={`delete "${text}"`}
-					className='btn item-delete'
+					className='btn item-btn--delete'
 					onClick={() => removeConcern({ id })}
 				>
 					&times;
 				</button>
+				</div>
 			</div>
 		</div>
 	);

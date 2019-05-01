@@ -18,7 +18,7 @@
 .item-wrapper :nth-child(2) {
 	flex: none;
 	box-sizing: border-box;
-	margin-left: var(--gutter);
+	margin-left: var(--half-gutter);
 }
 
 .item-body {
@@ -27,17 +27,7 @@
 
 .item-footer {
 	flex: none;
-}
-
-.item-edit {
-	font-size: 0.7rem;
-	text-transform: uppercase;
-	font-weight: 600;
-}
-
-.item-delete {
-	font-size: 1.4rem;
-	font-weight: 800;
+	display: flex;
 }
 
 .item-input {
@@ -48,3 +38,20 @@
 	font-size: 1rem;
 	width: 100%;
 }
+
+.item-btn--edit,
+.item-btn--delete {
+	background-color: #fff;
+}
+
+.item-btn--edit {
+	font-size: 0.7rem;
+	text-transform: uppercase;
+	font-weight: 600;
+}
+
+.item-btn--delete {
+	font-size: 1.4rem;
+	font-weight: 800;
+}
+
