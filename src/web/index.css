@@ -3,9 +3,9 @@
 	/* --main-bg-color: rgb(250, 252, 255); */
 	--main-bg-color: white;
 	--header-background: #83d0f2;
+	--white: #fff;
 
-	/* text */
-	--light-text-color: #fff;
+	--light-text-color: #888;
 	--mid-text-color: #666;
 	--dark-text-color: #333;
 
@@ -107,4 +107,17 @@ code {
 	width: 1px;
 	height: 1px;
 	overflow: hidden;
+}
+
+.ripple {
+	background-position: center;
+	transition: background 0.4s;
+}
+.ripple:hover {
+	background: #ccecfa radial-gradient(circle, transparent 1%, #fff 1%) center/15000%;
+}
+.ripple:active {
+	background-color: #ccecfa;
+	background-size: 100%;
+	transition: background 0s;
 }

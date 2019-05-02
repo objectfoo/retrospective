@@ -2,8 +2,6 @@ import React from 'react';
 import Field from './field';
 import './item.css';
 
-const TextWrapper = props => <div>{props.children}</div>;
-
 /**
  * @type {React.SFC}
  * @param {object} props
@@ -29,30 +27,30 @@ const Item = props => {
 					type={type}
 					initialValue={text}
 				/>
-				{!isEditing && <TextWrapper>{text}</TextWrapper>}
+				{!isEditing && <div className='item-text-wrapper'>{text}</div>}
 			</div>
 			<div className='item-footer'>
 				<div className='item-footer-item'>
-				<button
-					aria-haspopup='true'
-					aria-controls={id}
-					aria-expanded={isEditing}
-					className='btn item-btn--edit'
-					onClick={() => {
-						setEditing(isEditing ? null : id);
-					}}
-				>
-					edit
-				</button>
+					<button
+						aria-haspopup='true'
+						aria-controls={id}
+						aria-expanded={isEditing}
+						className='btn ripple item-btn--edit'
+						onClick={() => {
+							setEditing(isEditing ? null : id);
+						}}
+					>
+						edit
+					</button>
 				</div>
 				<div className='item-footer-item'>
-				<button
-					aria-label={`delete "${text}"`}
-					className='btn item-btn--delete'
-					onClick={() => removeConcern({ id })}
-				>
-					&times;
-				</button>
+					<button
+						aria-label={`delete "${text}"`}
+						className='btn ripple item-btn--delete'
+						onClick={() => removeConcern({ id })}
+					>
+						&times;
+					</button>
 				</div>
 			</div>
 		</div>

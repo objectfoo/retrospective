@@ -18,7 +18,6 @@
 .item-wrapper :nth-child(2) {
 	flex: none;
 	box-sizing: border-box;
-	margin-left: var(--half-gutter);
 }
 
 .item-body {
@@ -30,10 +29,16 @@
 	display: flex;
 }
 
+.item-text-wrapper {
+	font-size: 1rem;
+	margin: 2px; /* take care of the border around inputs */
+	padding: 8px 4px;
+}
+
 .item-input {
 	box-sizing: border-box;
 	margin: 0;
-	padding: 4px;
+	padding: 8px 4px;
 	min-height: 32px;
 	font-size: 1rem;
 	width: 100%;
@@ -42,16 +47,19 @@
 .item-btn--edit,
 .item-btn--delete {
 	background-color: #fff;
+	height: 100%;
+	margin: 0 4px;
 }
 
 .item-btn--edit {
 	font-size: 0.7rem;
-	text-transform: uppercase;
 	font-weight: 600;
+	line-height: 0.7rem;
+	text-transform: uppercase;
 }
 
 .item-btn--delete {
+	color: var(--light-text-color);
 	font-size: 1.4rem;
 	font-weight: 800;
 }
-

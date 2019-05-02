@@ -9,6 +9,7 @@
 }
 
 .section-list {
+	border: 1px solid var(--line-color);
 	margin: var(--gutter) 0;
 	padding-left: 0;
 }
@@ -19,5 +20,5 @@
 }
 
 .section-list > li + li {
-	margin-top: var(--gutter);
+	border-top: 1px solid var(--line-color);
 }

@@ -3,7 +3,7 @@
 	margin: 0;
 	font-weight: 500;
 	font-size: var(--headline-font-size);
-	color: var(--light-text-color);
+	color: var(--white);
 }
 
 .header-wrapper {
