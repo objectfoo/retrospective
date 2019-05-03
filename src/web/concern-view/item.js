@@ -2,17 +2,6 @@ import React from 'react';
 import Field from './field';
 import './item.css';
 
-/**
- * @type {React.SFC}
- * @param {object} props
- * @param	{string} props.id
- * @param {string} props.type
- * @param {string} props.text
- * @param {null|object} props.editing
- * @param {(id:string) => void} props.removeConcern
- * @param {(record: object) => void} props.setEditing
- * @return {React.ReactNode}
- */
 const Item = props => {
 	const { addConcern, editing, id, removeConcern, setEditing, text, type } = props;
 	const isEditing = editing === id;
@@ -20,6 +9,7 @@ const Item = props => {
 	return (
 		<div className='item-wrapper'>
 			<div className='item-body'>
+				{type === 'bad' && !isEditing && <div>Vote</div>}
 				<Field
 					hidden={!isEditing}
 					inputProps={{ 'aria-label': `edit entry in ${type} list`, id: id }}

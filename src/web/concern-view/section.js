@@ -1,7 +1,6 @@
 import React from 'react';
 import Item from './item';
 import Field from './field';
-import './section.css';
 
 const Section = props => {
 	const { editing, filteredConcerns: concerns, title, type, actions } = props;

@@ -5,3 +5,21 @@
 .app-main {
 	background-color: var(--main-bg-color);
 }
+
+.header-headline {
+	padding: 0.6rem 1rem;
+	margin: 0;
+	font-weight: 500;
+	font-size: var(--headline-font-size);
+	color: var(--white);
+}
+
+.header-wrapper {
+	background: var(--header-background);
+	border: 1px solid var(--line-color);
+}
+
+.header-btn-wrapper {
+	justify-content: center;
+	padding-right: 0.4rem;
+}
