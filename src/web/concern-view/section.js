@@ -1,12 +1,16 @@
 import React from 'react';
 import Item from './item';
 import Field from './field';
+import './section.css';
 
 const Section = props => {
 	const { editing, filteredConcerns: concerns, title, type, actions } = props;
 	const fProps = {
 		type,
-		addConcern: actions.addConcern,
+		onSubmit: data => {
+			console.log('asdf', data);
+			actions.addConcern(data);
+		},
 		inputProps: { id: type }
 	};
 

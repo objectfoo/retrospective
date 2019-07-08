@@ -1,6 +1,5 @@
 import React from 'react';
 import Field from './field';
-import './item.css';
 
 const Item = props => {
 	const { addConcern, editing, id, removeConcern, setEditing, text, type } = props;
@@ -13,9 +12,19 @@ const Item = props => {
 				<Field
 					hidden={!isEditing}
 					inputProps={{ 'aria-label': `edit entry in ${type} list`, id: id }}
+					onSubmit={data => {
+						if (data.text.length > 0) {
+							addConcern(data);
+						}
+					}}
 					addConcern={addConcern}
 					type={type}
 					initialValue={text}
+					onKeyDown={e => {
+						if (e.key === 'Escape' || e.keyCode === 27) {
+							setEditing(null);
+						}
+					}}
 				/>
 				{!isEditing && <div className='item-text-wrapper'>{text}</div>}
 			</div>

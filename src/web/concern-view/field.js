@@ -1,36 +1,39 @@
-import React, { useState } from 'react';
+import React, {  useRef } from 'react';
 
-const onSubmit = callback => e => {
+const stopEvent = e => {
 	e.preventDefault();
-	callback(e);
+	e.stopPropagation();
 };
 
-const onChange = callback => e => callback(e.target.value);
-
 const Field = props => {
-	const { addConcern, hidden, initialValue = '', inputProps = {}, type } = props;
-	const [fieldValue, setNewValue] = useState(initialValue);
+	const { onSubmit, onKeyDown, hidden, initialValue = '', inputProps = {}, type } = props;
+	const inputRef = useRef(null);
 
 	return (
 		<form
 			hidden={hidden}
 			noValidate
 			autoComplete='off'
-			onSubmit={onSubmit(() => {
-				if (fieldValue.length > 0) {
-					addConcern({ type, text: fieldValue });
-					setNewValue('');
-				}
-			})}
+			onSubmit={e => {
+				stopEvent(e);
+				const fld = e.target.elements['text-input'];
+				if (onSubmit) onSubmit({ type, text: fld.value.trim() });
+			}}
 		>
 			<input
+				name="text-input"
 				className='item-input'
-				{...inputProps}
 				type='text'
-				value={fieldValue}
-				onChange={onChange(text => {
-					setNewValue(text);
-				})}
+				{...inputProps}
+				ref={inputRef}
+				defaultValue={initialValue}
+				onKeyDown={e => {
+					if (e.key === 'Escape' || e.keyCode === 27) {
+						stopEvent(e);
+						inputRef.current.blur();
+					}
+					if (onKeyDown) onKeyDown(e);
+				}}
 			/>
 		</form>
 	);
