@@ -1,15 +1,13 @@
 import ReactDOM from "react-dom/client";
-import { GlobalStyles, ThemeProvider } from "@mui/material";
-import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
-import App from "./App.tsx";
-import { AppTheme } from "./AppTheme.ts";
+import App from "./App";
+import { AppThemeContext } from "./AppThemeContext";
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-ReactDOM.createRoot(document.getElementById("root")!).render(
-	<ThemeProvider theme={AppTheme({ palette: { mode: "light" } })}>
-		<GlobalStyles styles={{ body: { margin: 0 } }} />
-		<ScopedCssBaseline>
-			<App />
-		</ScopedCssBaseline>
-	</ThemeProvider>
+const el = document.getElementById("root");
+if (el === null) {
+	throw new Error("Can't find root element");
+}
+ReactDOM.createRoot(el).render(
+	<AppThemeContext>
+		<App />
+	</AppThemeContext>
 );
