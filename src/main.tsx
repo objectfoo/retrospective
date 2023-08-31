@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client";
-import App from "./App";
+import  Retrospective from "./Retrospective";
 import { AppThemeContext } from "./AppThemeContext";
 
 const el = document.getElementById("root");
@@ -8,6 +8,6 @@ if (el === null) {
 }
 ReactDOM.createRoot(el).render(
 	<AppThemeContext>
-		<App />
+		<Retrospective />
 	</AppThemeContext>
 );

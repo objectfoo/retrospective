@@ -1,8 +1,8 @@
 module.exports = {
 	root: true,
 	env: { node: true },
-	extends: [ "eslint:recommended" ],
-	ignorePatterns: ["dist","vite.config.ts"],
+	extends: ["eslint:recommended"],
+	ignorePatterns: ["dist", "vite.config.ts"],
 	rules: {
 		"quotes": ["error", "double"],
 		"semi": "error",
@@ -21,7 +21,7 @@ module.exports = {
 			parser: "@typescript-eslint/parser",
 			parserOptions: {
 				jsx: true,
-				project: true,
+				project: "./tsconfig.json",
 				tsconfigRootDir: __dirname,
 			},
 			extends: [
