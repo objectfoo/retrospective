@@ -5,6 +5,9 @@
 	"engines": {
 		"node": "^18.0.0||^19||^20"
 	},
+	"volta": {
+		"node": "20.5.1"
+	},
 	"type": "module",
 	"scripts": {
 		"check-node": "check-node-version --package",
